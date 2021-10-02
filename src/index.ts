@@ -173,14 +173,20 @@ app.get("/", (req, res) => {
     if (err) {
       res.sendStatus(404);
     } else {
+      const name   = req.query?.name || (config?.isRandomIdentityEnabled ? getRandomName() : "<请填写姓名>")
+      const school = req.query?.school || (config?.isRandomIdentityEnabled ? getRandomSchool() : "<请填写学院>")
+      const type   = req.query?.type || (config?.isRandomIdentityEnabled ? '入' : "<请填写出入校类型>")
+      const id     = req.query?.id || (config?.isRandomIdentityEnabled ? getRandomId() : "<请填写学号>")
+      const date   = new Date(Date.now() + 8 * 60 * 60 * 1000)
+
       let htmlString = data.toString()
-      const date     = new Date(Date.now() + 8 * 60 * 60 * 1000)
-      htmlString     = htmlString
-        .replace('__name__', req.query?.name || (config?.isRandomIdentityEnabled ? getRandomName() : "<请填写姓名>"))
-        .replace('__school__', req.query?.school || (config?.isRandomIdentityEnabled ? getRandomSchool() : "<请填写学院>"))
-        .replace('__type__', req.query?.type || (config?.isRandomIdentityEnabled ? '入' : "<请填写出入校类型>"))
-        .replace('__id__', req.query?.id || (config?.isRandomIdentityEnabled ? getRandomId() : "<请填写学号>"))
+        .replace('__department__', school)
+        .replace('__name__', name)
+        .replace('__school__', school)
+        .replace('__type__', type)
+        .replace('__id__', id)
         .replace('__time__', date.toISOString().replace("T", " ").slice(0, -5))
+
       config?.alert && (htmlString = htmlString.replace('__alert__', config?.alert))
 
       res.setHeader('Content-Type', 'text/html')
