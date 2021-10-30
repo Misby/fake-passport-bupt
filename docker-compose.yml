@@ -7,9 +7,9 @@ services:
     restart: unless-stopped
     # Uncomment the ports if you are not using traefik, i.e. you want to directly access it.
     # ports:
-    #   - "10985:10985"
+    #   - "${PORT}:${PORT}"
     networks:
-      - traefik-global-proxy
+      - "${TRAEFIK_NETWORK}"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.fake-passport-bupt.rule=Host(`${WEBSITE_URL}`)"
@@ -26,5 +26,5 @@ services:
       - "${PORT}"
 
 networks:
-  traefik-global-proxy:
+  "${TRAEFIK_NETWORK}":
     external: true
