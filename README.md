@@ -36,7 +36,7 @@
 
 1. 确保安装了 `docker` 和 `docker-compose`
 2. `docker-compose --file docker-compose-general.yml up --build` 来 build 并运行
-    - 如果你的服务器上使用 `traefik` 反向代理，你可以使用默认的 docker-compose 配置，`docker-compose up --build `，记得在 `.env` 文件中的 `WEBSITE_URL` 说明你的域名和路由
+    - 如果你的服务器上使用 `traefik` 反向代理，你可以使用默认的 docker-compose 配置，`docker-compose up --build `，记得在 `.env` 文件中的 `WEBSITE_URL` 说明你的域名和路由，同时取消Dockerfile和docker-compose.yml中有关的注释（注意你的network名称可能与我的不一样，记得修改）
 3. 现在你可以在浏览器 `localhost:10985` 访问它。桌面端样式不对和字体不对是正常现象，因为学校官方网站也是这样的，真正的完全相同（笑😂，微信访问就正常了
 4. 在服务器上部署时加上 `--detach` 参数即可在后台运行
 
@@ -56,9 +56,12 @@
 | school    | 你的学院                 | 随机学院 | 否，关闭匿名访问时必填 |
 | type      | 出校或入校，填 `出` 或 `入` | 入       | 否 |
 | id        | 你的学号                 | 随机学号 | 否，关闭匿名访问或开启白名单时必填 |
+| avatar        | 头像URL/ 7位数字（下方有解释）                 | 随机学号 | 否，关闭匿名访问或开启白名单时必填 |
 | auth | 额外身份验证信息 | 无 | 否，开启白名单时必填 |
 
-最终你的 URL 看起来会是这样：`http://localhost:10985/?school=你的学院&type=出&id=你的学号&name=你的名字`
+最终你的 URL 看起来会是这样：`http://localhost:10985/?school=你的学院&type=出&id=你的学号&name=你的名字&avatar=头像URL/ 7位数字 system  `
+
+解释：7位数字 可以通过查看官方页面的html文档中el-image类下img的src找到  
 
 ### 获取日志 GET `/logs`
 
