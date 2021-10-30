@@ -1,14 +1,16 @@
 # fake-passport-bupt
 
-网页版北邮出入校通行证的代码实现，可以**随机生成信息**或**自定义各种字段**。
+网页版北邮出入校通行证的代码实现。
 
-本项目仅为代码实现，你可以学习从代码到网站上线的过程，请勿用于非法用途
+本项目仅为代码实现，不提供任何形式的服务。
 
-<u>**鉴于现状和仓库类型，该仓库很可能在不远的将来删除（x**</u>
+你可以学习从代码到网站上线的过程，请勿用于非法用途。
 
 > 该软件“按原样”提供，不提供任何形式的明示或暗示的保证，包括但不限于适销性、特定用途的适用性和不侵权的保证。在任何情况下，无论是在合同诉讼、侵权行为或其他方面，作者或版权持有人均不对直接或间接产生于本软件、使用本软件的过程中或对本软件做其他处理产生的任何索赔、损害或其他后果承担任何责任。（译者（本人）不对中文译文的准确性做任何保证，任何信息请以原文为准，详见 LICENSE 文件或 MIT 许可协议。）
 > 
 > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+**鉴于现状和仓库类型，该仓库很可能在不远的将来删除（x**
 
 示例：
 
