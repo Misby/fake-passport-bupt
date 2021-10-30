@@ -169,13 +169,13 @@ app.get("/", (req, res) => {
     }
   }
 
-  const reg: RegExp = new RegExp('^[0-9]*$', 'g')
+  const reg: RegExp = new RegExp('^[0-9]+\/[0-9]+$', 'g')
   fs.readFile(path.join(__dirname, "..", 'static', 'index.html'), function (err, data) {
     if (err) {
       res.sendStatus(404);
     } else {
       const name = req.query?.name || (config?.isRandomIdentityEnabled ? getRandomName() : "<请填写姓名>")
-      const avatar = (req.query?.avatar == null || req.query?.avatar == '') ? "./index_files/defaltAvatar.svg" : (reg.test(req.query.avatar.toString()) ? ("https://imgservice.bupt.edu.cn/image/1860/" + req.query.avatar.toString() + ".jpg") : req.query.avatar)
+      const avatar = (req.query?.avatar == null || req.query?.avatar == '') ? "./index_files/defaltAvatar.svg" : (reg.test(req.query.avatar.toString()) ? ("https://imgservice.bupt.edu.cn/image/" + req.query.avatar.toString() + ".jpg") : req.query.avatar)
       const school = req.query?.school || (config?.isRandomIdentityEnabled ? getRandomSchool() : "<请填写学院>")
       const type = req.query?.type || (config?.isRandomIdentityEnabled ? '入' : "<请填写出入校类型>")
       const id = req.query?.id || (config?.isRandomIdentityEnabled ? getRandomId() : "<请填写学号>")
