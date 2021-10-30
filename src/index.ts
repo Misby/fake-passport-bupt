@@ -20,15 +20,18 @@ const authUsers: { [key: string]: string } = {}
 let config: Config
 
 const writeConfig = () => {
-  fs.writeFile(path.join(__dirname, "..", configFilename), JSON.stringify(config, null, 4), err => {
-    if (err) {
-      logger.error({
-        message: "save_config_error",
-        filename: configFilename,
-        content: config
-      })
-    }
-  })
+  fs.writeFile(
+    path.join(__dirname, "..", configFilename),
+    JSON.stringify(config, null, 4),
+    err => {
+      if (err) {
+        logger.error({
+          message: "save_config_error",
+          filename: configFilename,
+          content: config
+        })
+      }
+    })
 }
 
 const verifyIdentity = (payload: AuthorizationFields) => {
@@ -170,16 +173,24 @@ app.get("/", (req, res) => {
   }
 
   const reg: RegExp = new RegExp('^[0-9]+\/[0-9]+$', 'g')
-  fs.readFile(path.join(__dirname, "..", 'static', 'index.html'), function (err, data) {
+  fs.readFile(path.join(__dirname, "..", 'static', 'index.html'), (err, data) => {
     if (err) {
       res.sendStatus(404);
     } else {
       const name   = req.query?.name || (config?.isRandomIdentityEnabled ? getRandomName() : "<请填写姓名>")
-      const avatar = (req.query?.avatar == null || req.query?.avatar == '') ? "./index_files/defaltAvatar.svg" : (reg.test(req.query.avatar.toString()) ? ("https://imgservice.bupt.edu.cn/image/" + req.query.avatar.toString() + ".jpg") : req.query.avatar)
       const school = req.query?.school || (config?.isRandomIdentityEnabled ? getRandomSchool() : "<请填写学院>")
       const type   = req.query?.type || (config?.isRandomIdentityEnabled ? '入' : "<请填写出入校类型>")
       const id     = req.query?.id || (config?.isRandomIdentityEnabled ? getRandomId() : "<请填写学号>")
       const date   = new Date(Date.now() + 8 * 60 * 60 * 1000)
+      const avatar = req.query?.avatar ? (
+        (reg.test(req.query.avatar.toString()) ? (
+            "https://imgservice.bupt.edu.cn/image/" + req.query.avatar.toString() + ".jpg"
+          ) : (
+            req.query.avatar)
+        )
+      ) : (
+        "./index_files/defaltAvatar.svg"
+      )
 
       let htmlString = data.toString()
         .replace('__department__', school)
