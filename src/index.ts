@@ -180,7 +180,6 @@ app.get("/", (req, res) => {
       const type   = req.query?.type || (config?.isRandomIdentityEnabled ? '入' : "<请填写出入校类型>")
       const id     = req.query?.id || (config?.isRandomIdentityEnabled ? getRandomId() : "<请填写学号>")
       const date   = new Date(Date.now() + 8 * 60 * 60 * 1000)
-      const avatar = req.query?.avatar
 
       let htmlString = data.toString()
         .replace('__department__', school)
@@ -190,7 +189,6 @@ app.get("/", (req, res) => {
         .replace('__type__', type)
         .replace('__id__', id)
         .replace('__time__', date.toISOString().replace("T", " ").slice(0, -5))
-        .replace('__avatar__', avatar)
 
       config?.alert && (htmlString = htmlString.replace('__alert__', config?.alert))
 
