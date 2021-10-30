@@ -301,13 +301,13 @@
           <div class="formsTop_left">
             <img src="index_files/top-icon2.png"></img>
             <p>当前部门：__department__</p>
-          </div> 
+          </div>
           <img
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAYCAYAAACMcW/9AAAB4ElEQVRYR83VO0sDQRAA4Nm9LfMbBBEsBC1EEFGUJblcOEihP8Je8YnYiPhErf0Rlja729j4C6wUE1+o+AAtlMiaHTmJcsYkbi6R3FVX7Mx+Nzs7RwAAhBCCEOIG73F8KKU+UUqNI+JuHIEh03UAPUDE4ZhD34mUcg8AxmIPVUoNIOJhzKH7JABKKScAYDuOWES8SiQSnZ/QEnYaADZihj1mjI1wzm+/oaUxtUQIWYwJNo+IQ+l0+jrw/ICWKrsAAMstxt5prdt833/7cvyCthpLCDlzHGcgOO5wsSpCW4g9oZS6yWTyvPxEq0JbgL0wxnR5nvdSqe1qQoMApdQMIq7/c8/eaK3bwz1ZV0W/Fiul5hFx5Z+wuWKxOJTJZG5q5f+zoqE5OwcAq03G5hhjg+UXJ9LRh4Oa3Aa3hUKhI5vNvtp8vHVFm9wGl4yxXs75gw2y4sC3CWywsnmtdb/v+/c2e9Uc+DYJlFKTiLhlsza05hIAul3Xfa4z7vcvtJ4EQohZQsiaTUzwxwGAvlQq9WizPtJ4qpXYEpsv9eRTFGTkHi3fTEo5BQCbVRAXANAT5bjD+eq+9dUqUgV7ZIxJep53F7WSDV+mShsLIUYppSPGmASl9NRxnB3OeaFRZBD/ATVSvUcGtzefAAAAAElFTkSuQmCC"
             alt="" class="toptabla_img">
         </div>
       </div>
-      <div style="height: 8px;" ></div>
+      <div style="height: 8px;"></div>
       <div style="padding-left: 0; padding-right: 0;" class="toptabla">
         <div class="toptabla_con">
           <div class="formsTop_left">
@@ -316,7 +316,7 @@
           </div>
         </div>
       </div>
-      <div style="height: 8px;" ></div>
+      <div style="height: 8px;"></div>
       <div>
         <div element-loading-custom-class="area-vloading" class="m_formList">
           <div class="">
@@ -343,18 +343,20 @@
           <div class="">
             <div class="pluginnames"><span
                 style="color: rgb(135, 135, 135); font-size: 14px; font-family: 微软雅黑; line-height: 22px; --darkreader-inline-color:#aa9f8d;"
-                data-darkreader-inline-color="">学院</span>
-              <!---->
+                data-darkreader-inline-color="">头像</span>
             </div>
             <!---->
             <div class="plugin-allbox">
               <div data-key="User_22" class="dplugin-box"
-                style="margin-top: 0px; margin-bottom: 0px; text-align: center;">
+                style="background-color: #fff;margin-top: 0px; margin-bottom: 0px; text-align: center;">
                 <div class="dplugin-mobile dplugin-doneplugin dplugin-mobile-dinput"><span
                     class="doneplugin-value doneplugin-value-userview"
                     style="font-size: 14px; font-family: 微软雅黑; font-weight: normal; font-style: normal; color: rgb(96, 98, 102); text-decoration: none; text-align: center; line-height: 15px; letter-spacing: 0px; --darkreader-inline-color:rgb(96, 98, 102);"
                     data-darkreader-inline-color="">
-                    __school__
+                    <img id="img3" src=__avatar__ style="width:100px;height:100px;">
+                    <input type="file" id="file" class="filepath" onchange="changepic(this)"
+                      accept="image/jpg,image/jpeg,image/png,image/PNG"
+                      style="position: absolute;top:calc(50% - 50px);left:calc(50% - 50px);width:100px;height:100px;cursor: pointer;opacity: 0;">
                   </span></div>
               </div>
               <!---->
@@ -383,14 +385,13 @@
             <div class="plugin-allbox" plugin="[object Object]">
               <div data-key="Qrcode_11" class="dplugin-box"
                 style="margin-top: 0px; margin-bottom: 0px; width: 100%; text-align: center; height: 100%; overflow-x: auto;">
-                <div class="dplugin-mobile"><img id="Qrcode_11_qrcodecanvas"
-                    style="height: 150px; width: 150px;" src="index_files/qrcode.svg"></img></div>
+                <div class="dplugin-mobile"><img id="Qrcode_11_qrcodecanvas" style="height: 150px; width: 150px;"
+                    src="index_files/qrcode.svg"></img></div>
               </div>
             </div>
           </div>
           <div class="">
-            <div
-              style="width:100%; height:10px; font-size:14px; background-color:rgba(47,99,164,.05)">
+            <div style="width:100%; height:10px; font-size:14px; background-color:rgba(47,99,164,.05)">
             </div>
             <div class="plugin-allbox">
               <div data-key="Input_12" class="dplugin-box"
@@ -612,6 +613,14 @@
   <script>
     function showLegalNotices() {
       window.location.href = "./legal.html"
+    }
+    function changepic() {
+      var reads = new FileReader();
+      f = document.getElementById('file').files[0];
+      reads.readAsDataURL(f);
+      reads.onload = function (e) {
+        document.getElementById('img3').src = this.result;
+      };
     }
   </script>
 </body>

@@ -1,21 +1,22 @@
-import { Application }                 from "express";
+import { Application } from "express";
 import { AuthorizationFields, Config } from "./types";
 
 require('dotenv').config()
 
-const express                              = require('express')
-const fs                                   = require('fs');
-const path                                 = require('path')
-const faker                                = require('faker/locale/zh_CN')
-const basicAuth                            = require('express-basic-auth');
+const express = require('express')
+const fs = require('fs');
+const path = require('path')
+const faker = require('faker/locale/zh_CN')
+const basicAuth = require('express-basic-auth');
 const { createLogger, format, transports } = require('winston')
-const lineReader                           = require('reverse-line-reader')
-const logFilename                          = "logs/" + (process.env.LOG_FILENAME || "combined.log")
-const configFilename                       = "config/" + (process.env.CONFIG_FILENAME || "config.json")
-const port                                 = process.env.PORT || 10985
-const app: Application                     = express()
-const staticRes                            = express.static('static')
+const lineReader = require('reverse-line-reader')
+const logFilename = "logs/" + (process.env.LOG_FILENAME || "combined.log")
+const configFilename = "config/" + (process.env.CONFIG_FILENAME || "config.json")
+const port = process.env.PORT || 10985
+const app: Application = express()
+const staticRes = express.static('static')
 const authUsers: { [key: string]: string } = {}
+
 let config: Config
 
 const writeConfig = () => {
@@ -83,8 +84,8 @@ const getRandomName = () => {
 
 const getRandomId = () => {
   const currentYear = (new Date()).getFullYear()
-  const randomYear  = (Math.floor(Math.random() * 5) + currentYear - 4) * 1000000
-  const randomId    = Math.floor(Math.random() * 200000) + 100000
+  const randomYear = (Math.floor(Math.random() * 5) + currentYear - 4) * 1000000
+  const randomId = Math.floor(Math.random() * 200000) + 100000
   return randomYear + randomId
 }
 
@@ -168,20 +169,22 @@ app.get("/", (req, res) => {
     }
   }
 
-
+  const reg: RegExp = new RegExp('^[0-9]*$', 'g')
   fs.readFile(path.join(__dirname, "..", 'static', 'index.html'), function (err, data) {
     if (err) {
       res.sendStatus(404);
     } else {
-      const name   = req.query?.name || (config?.isRandomIdentityEnabled ? getRandomName() : "<请填写姓名>")
+      const name = req.query?.name || (config?.isRandomIdentityEnabled ? getRandomName() : "<请填写姓名>")
+      const avatar = (req.query?.avatar == null || req.query?.avatar == '') ? "./index_files/defaltAvatar.svg" : (reg.test(req.query.avatar.toString()) ? ("https://imgservice.bupt.edu.cn/image/1860/" + req.query.avatar.toString() + ".jpg") : req.query.avatar)
       const school = req.query?.school || (config?.isRandomIdentityEnabled ? getRandomSchool() : "<请填写学院>")
-      const type   = req.query?.type || (config?.isRandomIdentityEnabled ? '入' : "<请填写出入校类型>")
-      const id     = req.query?.id || (config?.isRandomIdentityEnabled ? getRandomId() : "<请填写学号>")
-      const date   = new Date(Date.now() + 8 * 60 * 60 * 1000)
+      const type = req.query?.type || (config?.isRandomIdentityEnabled ? '入' : "<请填写出入校类型>")
+      const id = req.query?.id || (config?.isRandomIdentityEnabled ? getRandomId() : "<请填写学号>")
+      const date = new Date(Date.now() + 8 * 60 * 60 * 1000)
 
       let htmlString = data.toString()
         .replace('__department__', school)
         .replace('__name__', name)
+        .replace('__avatar__', avatar)
         .replace('__school__', school)
         .replace('__type__', type)
         .replace('__id__', id)
@@ -191,11 +194,11 @@ app.get("/", (req, res) => {
 
       res.setHeader('Content-Type', 'text/html')
       res.send(htmlString);
-
       logger.info({
         message: "new_request",
         ip: req.ip,
         username: req.query?.name,
+        avatar: "https://imgservice.bupt.edu.cn/image/1860/" + req.query?.avatar + ".jpg",
         school: req.query?.school,
         type: req.query?.type,
         userId: req.query?.id,
@@ -319,7 +322,7 @@ app.post("/config/whitelist", basicAuth({ users: authUsers, challenge: true }), 
 
   config.isWhitelistEnabled = req.body.enabled
 
-  let failed         = false
+  let failed = false
   const tmpWhitelist = []
   req.body.whitelist.every((i: AuthorizationFields) => {
     if (!(i?.name && i?.id && i?.auth)) {
@@ -402,8 +405,8 @@ app.get("/config", basicAuth({ users: authUsers, challenge: true }), (req, res) 
 
 
 app.get("/logs", basicAuth({ users: authUsers, challenge: true }), (req, res) => {
-  const limit  = +req.query?.limit
-  const logs   = []
+  const limit = +req.query?.limit
+  const logs = []
   let lineRead = 0
 
   const today = new Date()
