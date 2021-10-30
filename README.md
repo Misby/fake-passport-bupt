@@ -47,7 +47,7 @@
 1. 确保安装了 `docker` 和 `docker-compose`
 2. `docker-compose --file docker-compose-general.yml up --build` 来 build 并运行
     - 如果你的服务器上使用 `traefik` 做反向代理，你可以参考默认的 docker-compose 配置运行（`docker-compose up --build `）
-        - 记得在 `.env` 文件中的 `WEBSITE_URL` 说明你的域名和路由，`TRAEFIK_NETWORK` 说明 `traefik` 所在的 docker network
+        - 记得在 `.env` 文件中的 `WEBSITE_URL` 说明你的域名和路由，docker-compose 配置文件中指定 `traefik` 所在的 docker network （你的名称可能和我的不一样）
 3. 如果你使用 `docker-compose-general.yml` 运行，那么你可以直接访问主机上你配置的端口。如果你使用了 `traefik`，你可以通过配置的 URL 访问 `traefik` 所在的容器来将流量代理到本项目的容器
 4. 在服务器上部署时加上 `--detach` 参数即可在后台运行，`docker-compose down` 或 `docker-compose rm -s -f` 来停止容器
 
@@ -158,14 +158,13 @@ Request body 使用 JSON
 
 ### dotenv 中环境变量的说明
 
-| ENV             | DESCRIPTION                                        |
-| --------------- | -------------------------------------------------- |
-| TZ              | 时区                                               |
-| WEBSITE_URL     | 使用 `traefik` 反向代理时本容器的 URL              |
-| PORT            | 后端监听的端口                                     |
-| AUTH_USERNAME   | 鉴权时的用户名                                     |
-| AUTH_PASSWORD   | 鉴权时的密码                                       |
-| LOG_FILENAME    | 日志文件文件名                                     |
-| CONFIG_FILENAME | 配置文件文件名                                     |
-| TRAEFIK_NETWORK | 使用 `traefik` 时，`traefik` 所在的 docker network |
+| ENV             | DESCRIPTION                           |
+| --------------- | ------------------------------------- |
+| TZ              | 时区                                  |
+| WEBSITE_URL     | 使用 `traefik` 反向代理时本容器的 URL |
+| PORT            | 后端监听的端口                        |
+| AUTH_USERNAME   | 鉴权时的用户名                        |
+| AUTH_PASSWORD   | 鉴权时的密码                          |
+| LOG_FILENAME    | 日志文件文件名                        |
+| CONFIG_FILENAME | 配置文件文件名                        |
 
