@@ -168,3 +168,7 @@ Request body 使用 JSON
 | LOG_FILENAME    | 日志文件文件名                        |
 | CONFIG_FILENAME | 配置文件文件名                        |
 
+## Acknowledgements
+
+- [SAZZM](https://github.com/SAZZM): 照片显示、选择和~~另一种~~ URL 指定方式
+- [xavier-niu2](https://github.com/xavier-niu2)：照片显示和 URL 指定
