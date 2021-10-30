@@ -452,6 +452,7 @@ app.use('/', staticRes)
 app.enable('trust proxy')
 
 app.listen(port, () => {
+  console.log("listening at", port)
   logger.info({
     message: 'server_start',
     serverPort: port,
