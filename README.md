@@ -56,12 +56,12 @@
 | school    | 你的学院                 | 随机学院 | 否，关闭匿名访问时必填 |
 | type      | 出校或入校，填 `出` 或 `入` | 入       | 否 |
 | id        | 你的学号                 | 随机学号 | 否，关闭匿名访问或开启白名单时必填 |
-| avatar        | 头像URL/ 7位数字（下方有解释）                 | 随机学号 | 否，关闭匿名访问或开启白名单时必填 |
+| avatar        | 头像URL或 xxxx/xxxxxxx                 | 随机学号 | 否，关闭匿名访问或开启白名单时必填 |
 | auth | 额外身份验证信息 | 无 | 否，开启白名单时必填 |
 
-最终你的 URL 看起来会是这样：`http://localhost:10985/?school=你的学院&type=出&id=你的学号&name=你的名字&avatar=头像URL/ 7位数字 system  `
+最终你的 URL 看起来会是这样：`http://localhost:10985/?school=你的学院&type=出&id=你的学号&name=你的名字&avatar=头像URL或 xxxx/xxxxxxx  `
 
-解释：7位数字 可以通过查看官方页面的html文档中el-image类下img的src找到  
+解释：xxxx/xxxxxxx 可以通过查看官方页面的html文档中el-image类下img的src找到  形如xxxx/xxxxxxx
 
 ### 获取日志 GET `/logs`
 
