@@ -13,3 +13,11 @@ else
         echo -e "${HEADER_INFO}pid=${GREY}${PID}${OFF} does not exist, skipping..."
     fi
 fi
+
+# recheck
+if [ "$(ps -p "${PID}" -o comm= 2>/dev/null)" != "" ]; then
+        echo -e "${HEADER_ERROR}failed to kill process , pid=${BOLD}${PID}${OFF} image=${BOLD}${IMAGE}${OFF} "
+    exit 1
+fi
+
+exit 0
