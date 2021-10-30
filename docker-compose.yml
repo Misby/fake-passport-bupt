@@ -5,11 +5,8 @@ services:
     image: charlie0129/fake-passport-bupt
     container_name: fake-passport-bupt
     restart: unless-stopped
-    # Uncomment the ports if you are not using traefik, i.e. you want to directly access it.
-    # ports:
-    #   - "${PORT}:${PORT}"
     networks:
-      - "${TRAEFIK_NETWORK}"
+      - traefik-global-proxy # change this to you network where traefik lives in
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.fake-passport-bupt.rule=Host(`${WEBSITE_URL}`)"
@@ -26,5 +23,5 @@ services:
       - "${PORT}"
 
 networks:
-  "${TRAEFIK_NETWORK}":
+  traefik-global-proxy: # change this to you network where traefik lives in
     external: true
